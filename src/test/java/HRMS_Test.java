@@ -12,7 +12,7 @@ public class HRMS_Test {
     //    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver/chromedriver.exe");
     //    System.setProperty("webdriver.chrome.driver", "drivers/chromedriver/chromedriver");
     // Set custom webDriver sysEnv
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver = new FirefoxDriver();
     driver.get("http://192.168.67.35/");
     driver.manage().window().maximize();
     driver.findElement(By.xpath(LoginPage.Screen.txtBoxUsername)).sendKeys("ptqanh");
