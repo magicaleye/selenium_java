@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pageObject.HrmsLoginPage;
 import pageObject.OrangeLoginPage;
 
-public class LoginTest {
+public class testPOM {
 
   private static WebDriver driver = null;
   public static void main(String[] args) throws InterruptedException {
