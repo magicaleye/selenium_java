@@ -6,20 +6,21 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pageObject.OrangeLoginPage;
 import pageObject.OrangeLoginPageObject;
 
-public class LoginTest {
+import java.util.concurrent.TimeUnit;
 
-  private static WebDriver driver = null;
+public class LoginTest {
 
   public static void main(String[] args) throws InterruptedException {
     loginToMainPage();
   }
 
   public static void loginToMainPage() throws InterruptedException {
-    driver = new ChromeDriver();
+    WebDriver driver = new ChromeDriver();
     OrangeLoginPageObject loginPgObj = new OrangeLoginPageObject(driver);
     driver.get("https://opensource-demo.orangehrmlive.com/index.php/auth/login");
+    driver.manage().window().maximize();
 
-    loginPgObj.userEnterCredentials("dqhieu", "Hieu_263@@");
+    loginPgObj.userEnterCredentials("admin", "admin123");
     loginPgObj.userLogin();
 
     Thread.sleep(5000);
