@@ -1,0 +1,62 @@
+version: "3"
+services:
+  mariadb:
+    image: bitnami/mariadb:10.3
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MARIADB_USER=dhieu
+      - MARIADB_DATABASE=opencart
+    volumes:
+      - "mariadb_data:/bitnami/mariadb"
+    networks:
+      net_local:
+        ipv4_address: 172.28.0.3
+
+  opencart:
+    image: bitnami/opencart:3
+    ports:
+      - "80:8080"
+    environment:
+      - OPENCART_HOST=localhost
+      - OPENCART_DATABASE_HOST=mariadb
+      - OPENCART_DATABASE_PORT_NUMBER=3306
+      - OPENCART_DATABASE_USER=dhieu
+      - OPENCART_DATABASE_NAME=opencart
+      - ALLOW_EMPTY_PASSWORD=yes
+    volumes:
+      - "opencart_data:/bitnami/opencart"
+      - "opencart_storage_data:/bitnami/opencart_storage/"
+    depends_on:
+      - mariadb
+    networks:
+      net_local:
+        ipv4_address: 172.28.0.2
+      net_pro:
+
+  phpma:
+    image: phpmyadmin:latest
+    environment:
+      - PMA_HOST=mariadb
+    ports:
+      - "8181:80"
+    networks:
+      net_local:
+        ipv4_address: 172.28.0.4
+
+volumes:
+  mariadb_data: {}
+  opencart_data: {}
+  opencart_storage_data: {}
+
+networks:
+  net_local:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
+  net_pro:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.27.0.0/24
+          gateway: 172.27.0.1
