@@ -15,7 +15,7 @@ services:
   opencart:
     image: bitnami/opencart:3
     ports:
-      - "80:8080"
+      - "80:80"
     environment:
       - OPENCART_HOST=localhost
       - OPENCART_DATABASE_HOST=mariadb
@@ -23,6 +23,7 @@ services:
       - OPENCART_DATABASE_USER=dhieu
       - OPENCART_DATABASE_NAME=opencart
       - ALLOW_EMPTY_PASSWORD=yes
+      - OPENCART_SKIP_BOOTSTRAP=no
     volumes:
       - "opencart_data:/bitnami/opencart"
       - "opencart_storage_data:/bitnami/opencart_storage/"
